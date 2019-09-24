@@ -20,6 +20,6 @@ public class ConsoleOSLog: RegisterLogType {
 
     public func setuplog() -> OSLog {
         let subsystem = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
-        return OSLog(subsystem: subsystem, category: String(describing: type(of: self)))
+        return OSLog(subsystem: subsystem, category: "info")
     }
 }
