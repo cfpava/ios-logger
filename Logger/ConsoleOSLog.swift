@@ -15,7 +15,14 @@ public class ConsoleOSLog: RegisterLogType {
     
     public func send(log: Log) {
         let data = log.toString()
+        let signpostID = OSSignpostID(log: self.setuplog())
         os_log("%@", log: self.setuplog(), data)
+        os_signpost(.begin,
+                    log: self.setuplog(),
+                    name: "Fetch recordings",
+                    signpostID: signpostID,
+                    "%@",
+                    data)
     }
 
     public func setuplog() -> OSLog {
