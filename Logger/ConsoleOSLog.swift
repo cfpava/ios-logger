@@ -19,7 +19,7 @@ public class ConsoleOSLog: RegisterLogType {
         if #available(iOS 12.0, *) {
             let signpostID = OSSignpostID(log: self.setuplog())
             os_signpost(.end, log: self.setuplog(),
-                        name: "Info Debug", signpostID: signpostID)
+                        name: "Info", signpostID: signpostID)
         }
     }
 
