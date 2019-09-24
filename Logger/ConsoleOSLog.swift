@@ -16,11 +16,6 @@ public class ConsoleOSLog: RegisterLogType {
     public func send(log: Log) {
         let data = log.toString()
         os_log("%@", log: self.setuplog(), data)
-        if #available(iOS 12.0, *) {
-            let signpostID = OSSignpostID(log: self.setuplog())
-            os_signpost(.end, log: self.setuplog(),
-                        name: "Info", signpostID: signpostID)
-        }
     }
 
     public func setuplog() -> OSLog {
