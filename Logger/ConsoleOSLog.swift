@@ -15,18 +15,16 @@ public class ConsoleOSLog: RegisterLogType {
     
     public func send(log: Log) {
         let data = log.toString()
-        let signpostID = OSSignpostID(log: self.setuplog())
         os_log("%@", log: self.setuplog(), data)
-        os_signpost(.begin,
-                    log: self.setuplog(),
-                    name: "Fetch recordings",
-                    signpostID: signpostID,
-                    "%@",
-                    data)
+        if #available(iOS 12.0, *) {
+            let signpostID = OSSignpostID(log: self.setuplog())
+            os_signpost(.end, log: self.setuplog(),
+                        name: "Info Debug", signpostID: signpostID)
+        }
     }
 
     public func setuplog() -> OSLog {
         let subsystem = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
-        return OSLog(subsystem: subsystem, category: "info")
+        return OSLog(subsystem: subsystem, category: "Logger")
     }
 }
